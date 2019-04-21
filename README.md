@@ -504,11 +504,13 @@
 
 ----
 
-* 什么是webpack？vue-router是什么？使用它的用途有哪些？
+* 什么是webpack？vue-loader是什么？使用它的用途有哪些？
 
   * webpack是一个模块打包工具（打包，压缩各种静态资源的工具）
 
-  * 
+  * vue文件的一个加载器
+
+  * `js` 可以写 `ES6` 、 `style` 样式可以使用 `scss` 或 `less` 、 `template` 可以加 `jade` 等
 
 ----
 
@@ -516,15 +518,47 @@
 
 ----
 
-* XMLHttpRequest：XMLHttpRequest.readyState：请说出下列状态码的意思
+* XMLHttpRequest：XMLHttpRequest.readyState：状态码的意思
+
+  * 0 - （未初始化）还没有调用 `send()` 方法
+
+  * 1 - （载入）已调用 `send()` 方法，正在发送请求
+
+  * 2 - （载入完成） `send()` 方法执行完成，已经接受到全部响应内容
+
+  * 3 - （交互）正在解析响应内容
+
+  * 4 - （完成）响应内容解析完成，可以在客户端调用了
 
 ----
 
 * 请说出vue.cli项目中src目录每个文件夹和文件的用法？
 
+  * `assets` 是静态资源文件夹
+
+  * `components` 是组件文件夹
+
+  * `router` 是定义路由配置文件夹
+
+  * `view` 是视图文件夹
+
+  * `app.vue` 是应用主组件
+
+  * `main.js` 是入口文件
+
 ----
 
 * vue.cli中怎样使用自定义的组件？有遇到过哪些问题吗？
+
+  * 第一步：在 `components` 目录下新建你的组件文件（如： `myComponent.vue` ）， `script` 一定要 `export default {}`
+
+  * 第二步：在需要的页面中导入： `import myComponent from '../components/myComponent.vue'`
+
+  * 第三步：注入到vue的子组件的 `components` 属性上面： `components: { myComponent }`
+
+  * 第四步：在 `template` 视图 `view` 中使用： `<my-component></my-component>`
+
+  问题： `myComponent` 命名，使用时需要改为 `my-component`
 
 ----
 
@@ -534,13 +568,51 @@
 
 * 你觉得哪些项目适合vue框架？
 
+  * 数据信息量比较多的，反之类似企业网站就无需此框架了
+
+  * 手机web和app应用多端公用一套界面的项目，因为使用 `vue.cli + webpack` 后的前端目录，非常有利于项目的跨平台部署
+
 ----
 
 * call()和apply()的作用和区别？
 
+  * `call()` 和 `apply()` 作用都是改变this指向
+
+  * `call()` ：第一个参数是this值没有改变，变化的是其余参数都直接传递给函数（传递给函数的参数必须逐个列举出来）
+
+  * `apply()` ：传递给函数的是参数数组
+
+  ``` javascript
+  function add(c, d) {
+    return this.a + this.b + c + d
+  }
+
+  var o = {a:1, b:3}
+  add.call(o, 5, 7)   // 1 + 3 + 5 + 7 = 16
+  add.apply(o, [10, 20])   // 1 + 3 + 10 + 20 = 34
+  ```
+
 ----
 
 * 举例说ES6有哪些的新功能？
+
+  * 箭头函数（当要求动态上下文的时候，就不能够使用箭头函数，爷爷就是this的固定化）
+
+    * 在使用 `=>` 定义函数的时候， `this` 的指向是定义时所在的对象，而不是使用时所在的对象
+
+    * 不能够用作构造函数，也就是不能够使用 `new` 命令，否则就会抛出一个错误
+
+    * 不能够使用 `arguments` 对象
+
+    * 不能使用 `yield` 命令
+
+  * `let` 和 `const`
+
+    * `let` 声明的变量具有块级作用域
+
+    * `let` 声明的变量不能通过 `window` 变量名进行访问
+
+    * 形如 `for(let x..)` 的循环是每次迭代都为 `x` 创建新的绑定
 
 ----
 
